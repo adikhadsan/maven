@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+         agent any
    
     stages {
         stage('Clean and Install') {
@@ -26,5 +26,6 @@ pipeline {
                     echo 'Succefully uploaded to jfrog artifact'
                 }
             }
+         }
         }
         }
