@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+   
+    stages {
+        stage('Clean and Install') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage ('Package'){
+            steps {
+                sh 'mvn package'
+             }
+        }
+         stage('Upload Artifact to artifactory'){
+            environment{
+                CI = true
+                
+                PASS = credentials('pass')
+            }
+            steps{
+                sh 'curl -u jenkins:${PASS} -T /var/lib/jenkins/workspace/maven "http://192.168.59.1:8082/artifactory/jenkins/"'
+            }
+            post{
+                success{
+                    echo 'Succefully uploaded to jfrog artifact'
+                }
+            }
+        }	 
