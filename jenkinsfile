@@ -26,4 +26,5 @@ pipeline {
                     echo 'Succefully uploaded to jfrog artifact'
                 }
             }
-        }	 
+        }
+        }
